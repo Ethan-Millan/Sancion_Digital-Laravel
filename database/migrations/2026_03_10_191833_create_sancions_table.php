@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sancions', function (Blueprint $table) {
+        Schema::create('sanciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('alumno_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('vigilante_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('multa_id')->constrained('multas')->onDelete('cascade');
+            $table->string('descripcion', 255);
+            $table->boolean('pagada')->default(0); 
             $table->timestamps();
         });
     }

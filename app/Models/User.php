@@ -38,4 +38,12 @@ class User extends Authenticatable
             'rol' => UserRol::class
         ];
     }
+
+    public function sanciones(){
+        return $this->hasMany(Sancion::class, 'alumno_id');
+    }
+
+    public function sanciones_vigilante(){
+        return $this->hasMany(Sancion::class, 'vigilante_id');
+    }
 }
