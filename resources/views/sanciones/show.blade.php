@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <a href="{{ route('sanciones.create')}}" class="btn-navegacion">Registrar sanción</a>
     <table border="1">
         <tr>
             <th>Alumno</th>
@@ -13,10 +12,12 @@
             <th>Descripcion</th>
             <th>Saldada</th>
             <th>Horas</th>
-            <th>Acciones</th>
         </tr>
-    
-        @forelse($sanciones as $sancion)
+            @if ($sancion)
+                
+
+                
+
             <tr>
                 <td>{{ $sancion->alumno->nombre }}</td>
                 <td>{{ $sancion->alumno->matricula}}</td>
@@ -26,24 +27,14 @@
                 <td>{{ $sancion->descripcion}}</td>
                 <td>{{ ($sancion->pagada) ? "SI" : "NO"}}</td>
                 <td>{{ $sancion->multa->hora_infraccion}}</td>
-                <td>
-                    <a href="{{ route('sanciones.show', $sancion->id) }}" class="btn-accion">Ver</a>
-                    <a href="{{ route('sanciones.edit', $sancion->id) }}" class="btn-accion">Editar</a>
-                    <form action="{{ route('sanciones.destroy', $sancion->id) }}" method="POST"
-                        onsubmit="return confirm('¿Eliminar esta sanción?')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Eliminar</button>
-                    </form>
-                </td>
             </tr>
-        @empty
+            @else
             <tr>
                 <td colspan="8">No hay registros que mostrar</td>
             </tr>
-        @endforelse
+            @endif
     </table>
 
-    <a href="{{ route('sanciones.create')}}" class="btn-navegacion">Crear sanción</a>
+    <a href="{{ route('sanciones.index') }}" class="btn-navegacion">Volver a la lista</a>
 
 @endsection
