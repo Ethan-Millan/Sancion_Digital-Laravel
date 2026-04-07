@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSancionRequest;
+use App\Http\Requests\UpdateSancionRequest;
 use App\Models\Multa;
 use App\Models\Sancion;
 use App\Models\User;
@@ -35,7 +37,7 @@ class SancionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSancionRequest $request)
     {
         Sancion::create($request->only('alumno_id', 'vigilante_id', 'multa_id', 'descripcion'));
 
@@ -69,7 +71,7 @@ class SancionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSancionRequest $request, string $id)
     {
         $sancion = Sancion::findOrFail($id);
 
